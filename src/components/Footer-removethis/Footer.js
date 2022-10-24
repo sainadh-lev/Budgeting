@@ -10,7 +10,7 @@ const Footer = () => {
           target="_blank"
           rel="noreferrer"
         >
-          Shashikanth
+          Group_36@nitc
         </a>
       </p>
     </div>

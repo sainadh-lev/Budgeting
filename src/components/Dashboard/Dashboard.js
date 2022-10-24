@@ -19,6 +19,7 @@ const Dashboard = (props) => {
       items={props.items}
       onRemoveIncomeItem={props.onRemoveIncomeItem}
       onRemoveExpensesItem={props.onRemoveExpensesItem}
+      onRemovePlannedExpenseItem={props.onRemovePlannedExpenseItem}
       onShowBudgetForm={props.onShowBudgetForm}
       onSetFormType={props.onSetFormType}
     />

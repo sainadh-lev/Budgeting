@@ -29,6 +29,14 @@
   color: #f01515;
 }
 
+.planned-expenses-amount {
+  color: gold;
+}
+
+/* #pestyle {
+  background-color: #56d941;
+} */
+
 .delete {
   display: block;
   margin-left: 10px;

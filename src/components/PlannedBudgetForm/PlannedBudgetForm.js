@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { nanoid } from "nanoid";
-import styles from "./BudgetForm.module.css";
+import styles from "./PlannedBudgetForm.module.css";
 import Modal from "../UI/Modal";
 
 const MONTHS = [
@@ -18,25 +18,29 @@ const MONTHS = [
   "Dec",
 ];
 
-const BudgetForm = (props) => {
+const PlannedBudgetForm = (props) => {
   const [titleIsValid, setTitleIsValid] = useState(true);
   const [amountIsValid, setAmountIsValid] = useState(true);
+  const [priorityIsValid, setPriorityIsValid] = useState(true);
 
   const titleInputRef = useRef();
   const amountInputRef = useRef();
+  const priorityInputRef = useRef();
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
     const enteredTitle = titleInputRef.current.value.trim();
     const enteredAmount = parseInt(amountInputRef.current.value.trim());
+    const enteredPriority = parseInt(priorityInputRef.current.value.trim());
 
-    if (enteredTitle && enteredAmount >= 0) {
+    if (enteredTitle && enteredAmount >= 0 && enteredPriority >= 0) {
       const date = new Date();
       const budgetItem = {
         id: nanoid(10),
         title: enteredTitle,
         amount: enteredAmount,
+        priority: enteredPriority,
         dateTime: {
           day: date.getDate(),
           month: MONTHS[date.getMonth()],
@@ -62,6 +66,9 @@ const BudgetForm = (props) => {
       if (!enteredAmount) {
         setAmountIsValid(false);
       }
+      if(!enteredPriority) {
+        setPriorityIsValid(false);
+      }
     }
   };
 
@@ -80,19 +87,15 @@ const BudgetForm = (props) => {
         >
           <label htmlFor="amount">Amount</label>
           <input ref={amountInputRef} type="number" id="amount" />
-          <p>Please enter a valid amount</p>
+          <p>Please enter a valid amount</p>  
         </div>
-        {props.whichForm === "plannedexpense" && (
-          <div
-            className={`${styles.control} ${
-              amountIsValid ? "" : styles.invalid
-            }`}
-          >
-            <label htmlFor="priority">Priority</label>
-            <input ref={amountInputRef} type="number" id="priority" />
-            <p>Please enter a valid priority</p>
-          </div>
-        )}
+        <div
+          className={`${styles.control} ${priorityIsValid ? "" : styles.invalid}`}
+        >
+          <label htmlFor="priority">Priority</label>
+          <input ref={priorityInputRef} type="number" id="priority" />
+          <p>Please enter a valid priority</p>
+        </div>
         <div className={styles.actions}>
           <button type="button" onClick={props.onClose}>
             Cancel
@@ -104,4 +107,4 @@ const BudgetForm = (props) => {
   );
 };
 
-export default BudgetForm;
+export default PlannedBudgetForm;

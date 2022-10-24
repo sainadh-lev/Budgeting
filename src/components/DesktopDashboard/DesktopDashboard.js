@@ -18,6 +18,18 @@ const DesktopDashboard = (props) => {
         />
       </div>
       <div className={styles.board}>
+        <h2 className={styles.title}>PlannedExpenses</h2>
+        <BudgetList
+          type="plannedexpense"
+          items={props.items.plannedexpenses}
+          onRemoveItem={props.onRemovePlannedExpenseItem}
+        />
+        <Add
+          onSetFormType={props.onSetFormType.bind(null, 'plannedexpense')}
+          onShowBudgetForm={props.onShowBudgetForm}
+        />
+      </div>
+      <div className={styles.board}>
         <h2 className={styles.title}>Expenses</h2>
         <BudgetList
           type="expenses"
